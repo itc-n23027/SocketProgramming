@@ -1,15 +1,15 @@
-#!/usr/bin/env python3
-
 import socket
+
 
 def send_msg(sock, msg):
     total_sent_len = 0
     total_msg_len = len(msg)
     while total_sent_len < total_msg_len:
-        sent_len= sock.send(msg[total_sent_len:])
+        sent_len = sock.send(msg[total_sent_len:])
         if sent_len == 0:
             raise RuntimeError('socket connection broken')
         total_sent_len += sent_len
+
 
 def recv_msg(sock, chunk_len=1024):
     while True:
@@ -17,6 +17,7 @@ def recv_msg(sock, chunk_len=1024):
         if len(received_chunk) == 0:
             break
         yield received_chunk
+
 
 def main(IP_ADDR, PORT):
     client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
